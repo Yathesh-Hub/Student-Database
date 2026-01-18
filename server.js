@@ -59,9 +59,6 @@ app.delete("/delStudent/:sid", async (req, res) => {
 });
 
 app.put("/updateStudent/:sid", async (req, res) => {
-    console.log("URL SID:", req.params.sid);
-    console.log("BODY:", req.body);
-
     try {
         const sid = req.params.sid;
         const { name, dept } = req.body;
@@ -71,15 +68,11 @@ app.put("/updateStudent/:sid", async (req, res) => {
             { name, dept },
             { new: true }
         );
-
-        console.log("UPDATED:", student);
-
         if (!student) {
             return res.json({ message:"Student Not Found" });
         }
-
         res.json({ message: "Student Updated Successfully" });
-    } catch (err) {
+    }catch (err) {
         console.log(err);
         res.status(500).json({ message: "Update Error" });
     }
@@ -87,4 +80,3 @@ app.put("/updateStudent/:sid", async (req, res) => {
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
-
